@@ -1,5 +1,7 @@
 package models
 
+import "github.com/sashabaranov/go-openai"
+
 type ErrorResponse struct {
 	Message string `json:"message"`
 	Code    string `json:"code"`
@@ -17,4 +19,10 @@ type ProjectInput struct {
 	TargetAudience  string   `json:"target_audience"`
 	KeyIntegrations []string `json:"key_integrations"`
 	Constraints     string   `json:"constraints"`
+}
+
+type ConversationHistory struct {
+	Id           int
+	ProjectInput ProjectInput
+	History      []openai.ChatCompletionMessage
 }
