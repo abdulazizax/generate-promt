@@ -47,7 +47,7 @@ func (h *Handler) ExecutePrompt(ctx *gin.Context) {
 			return
 		}
 
-		err = h.writeFile(fmt.Sprintf("pkg/response/response_%d.txt", conversationHistory.Id), resp)
+		err = h.writeFile(fmt.Sprintf("pkg/response/response_%d.md", conversationHistory.Id), resp)
 		if err != nil {
 			h.ReturnError(ctx, config.ErrorInternalServer, "Error while writing file", http.StatusInternalServerError)
 			return

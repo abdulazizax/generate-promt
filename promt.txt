@@ -21,3 +21,27 @@
   "project_summary": "SalomTV - это онлайн-стриминговая платформа, предназначенная для пользователей Узбекистана, предлагающая высококачественные фильмы, телешоу и прямые трансляции. Платформа поддерживает узбекский, русский и английский языки и работает по модели подписки. Доступна через веб, мобильные приложения и смарт-ТВ.",
   "target_audience": "Жители Узбекистана, любители кино и телевидения, молодежь, семьи"
 }
+
+{
+  "client_goals": [
+    "Deliver high-quality films, TV shows, and live broadcasts to the Uzbek audience",
+    "Support multilingual content in Uzbek, Russian, and English",
+    "Implement a subscription-based monetization model",
+    "Ensure accessibility on web platforms, mobile apps, and smart TVs"
+  ],
+  "company_name": "SalomTV",
+  "competitors": [
+    "Netflix - Global OTT service",
+    "IVI - Popular Russian streaming service",
+    "Megogo - Streaming service in CIS countries"
+  ],
+  "constraints": "Licensing restrictions for international content, compliance with local regulatory requirements, ensuring adequate server infrastructure for scalability",
+  "key_integrations": [
+    "Stripe - Payment processing",
+    "Google Cast - Smart TV support",
+    "CDN - Optimized video delivery",
+    "Telegram Bot - Notifications and updates"
+  ],
+  "project_summary": "SalomTV is an online streaming platform designed for users in Uzbekistan, offering high-quality films, TV shows, and live broadcasts. The platform supports Uzbek, Russian, and English languages and operates on a subscription model. It is available through web platforms, mobile apps, and smart TVs.",
+  "target_audience": "Residents of Uzbekistan, film and television enthusiasts, young people, families"
+}

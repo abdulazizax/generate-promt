@@ -16,7 +16,7 @@ func ExecutePrompt(openaiClient *openai.Client, newPrompt string, conversationHi
 	conversationHistory.History = append(conversationHistory.History, newMessage)
 
 	resp, err := openaiClient.CreateChatCompletion(context.Background(), openai.ChatCompletionRequest{
-		Model:    openai.GPT4,
+		Model:    openai.GPT4o,
 		Messages: conversationHistory.History,
 	})
 	if err != nil {
