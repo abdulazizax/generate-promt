@@ -72,7 +72,7 @@ func makeFilePublic(fileID string) error {
 
 	perm := &drive.Permission{
 		Type: "anyone",
-		Role: "reader",
+		Role: "writer",
 	}
 
 	_, err = driveService.Permissions.Create(fileID, perm).Do()
