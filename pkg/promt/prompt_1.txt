@@ -1,0 +1,51 @@
+You are an experienced IT project analyst. Based on the information below, create:
+1. A **project brief** with:
+   - project_goal
+   - primary_objectives
+   - expected_outcomes
+   - success_metrics
+
+2. **Functional requirements** in nested format:
+   - "functional_requirements": an array of epics
+   - Each epic has:
+       "epic": the epic title
+       "stories": an array of story objects
+   - Each story has:
+       "story": the story title
+       "tasks": an array of tasks (strings)
+
+We want multiple epics, each with multiple stories, and each story with multiple tasks.
+
+You must respond **only** in **this exact JSON format** (no extra text before or after):
+{
+  "project_brief": {
+    "project_goal": "",
+    "primary_objectives": "",
+    "expected_outcomes": "",
+    "success_metrics": ""
+  },
+  "functional_requirements": [
+    {
+      "epic": "",
+      "stories": [
+        {
+          "story": "",
+          "tasks": [""]
+        }
+      ]
+    }
+  ]
+}
+
+Information Provided:
+- Company Name: [company_name]
+- Project Summary: [project_summary]
+- Competitors: [competitors]
+- Client Goals: [client_goals]
+- Target Audience: [target_audience]
+- Key Integrations: [key_integrations]
+- Constraints: [constraints]
+
+No additional commentary or text should be included outside the JSON.
+You are ChatGPT. Always respond in valid JSON only.
+Please return the response exactly in the same JSON format (without enclosing in triple quotes and without any additional text).
