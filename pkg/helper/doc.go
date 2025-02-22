@@ -35,6 +35,9 @@ func CreateNewDoc(docsService *docs.Service, title string, tabNames []string) (*
 	if err != nil {
 		return nil, fmt.Errorf("failed to batch-update doc: %v", err)
 	}
-
+	err = makeFilePublic(doc.DocumentId)
+	if err != nil {
+		return nil, err
+	}
 	return doc, nil
 }

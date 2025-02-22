@@ -28,7 +28,9 @@ import (
 // @Router /prompt/execute [post]
 func (h *Handler) ExecutePrompt(ctx *gin.Context) {
 	var (
-		body models.ProjectInput
+		body     models.ProjectInput
+		sheetUrl string
+		docUrl   string
 	)
 
 	err := ctx.ShouldBindJSON(&body)
@@ -69,26 +71,36 @@ func (h *Handler) ExecutePrompt(ctx *gin.Context) {
 				h.ReturnError(ctx, config.ErrorInternalServer, "failed to writing response to excel sheets", http.StatusInternalServerError)
 				return
 			}
+			sheetUrl = fmt.Sprintf("https://docs.google.com/spreadsheets/d/%s/edit", spreadsheet.SpreadsheetId)
+
 			if err := helper.ExportProjectDataToDoc(h.DocService, doc.DocumentId, "tab1", &projectData.ProjectBrief); err != nil {
 				h.ReturnError(ctx, config.ErrorInternalServer, "failed to writing response to google doc", http.StatusInternalServerError)
 				return
 			}
+			docUrl = fmt.Sprintf("https://docs.google.com/document/d/%s/edit", doc.DocumentId)
 		case 2:
-			err := helper.WriteDataToCompetitorsSheet(h.SheetService, spreadsheet.SpreadsheetId, "Competitors", resp)
+			err = helper.WriteDataToCompetitorsSheet(h.SheetService, spreadsheet.SpreadsheetId, "Competitors", resp)
 			if err != nil {
 				h.ReturnError(ctx, config.ErrorInternalServer, "failed to writing response to excel sheets", http.StatusInternalServerError)
 				return
 			}
 		case 6:
-			err := helper.WriteDataToPricingSheet(h.SheetService, spreadsheet.SpreadsheetId, "Pricing", resp)
+			err = helper.WriteDataToPricingSheet(h.SheetService, spreadsheet.SpreadsheetId, "Pricing", resp)
 			if err != nil {
 				h.ReturnError(ctx, config.ErrorInternalServer, "failed to writing response to excel sheets", http.StatusInternalServerError)
 				return
 			}
+			break
 		}
-	}
 
-	ctx.JSON(http.StatusOK, models.SuccessResponse{Message: "Success!"})
+		ctx.JSON(http.StatusOK, gin.H{
+			"message":  "Success!",
+			"docUrl":   docUrl,
+			"sheetUrl": sheetUrl,
+		})
+
+		ctx.JSON(http.StatusOK, models.SuccessResponse{Message: "Success!"})
+	}
 }
 
 func (h *Handler) processPrompt(conversationHistory *models.ConversationHistory) (string, error) {
