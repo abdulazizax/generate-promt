@@ -39,7 +39,7 @@ func (h *Handler) ExecutePrompt(ctx *gin.Context) {
 		return
 	}
 
-	spreadsheet, err := helper.CreateNewSpreadsheet(h.SheetService, body.CompanyName, []string{"functionalReqs", "tab2", "tab3"})
+	spreadsheet, err := helper.CreateNewSpreadsheet(h.SheetService, body.CompanyName, []string{"functionalReqs", "Competitors", "Pricing"})
 	if err != nil {
 		h.ReturnError(ctx, config.ErrorInternalServer, fmt.Sprintf("Failed to create a new spreadsheet: %v", err), http.StatusInternalServerError)
 		return
