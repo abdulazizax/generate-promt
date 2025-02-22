@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"generate-promt-v1/api/models"
+
 	"google.golang.org/api/docs/v1"
 	"google.golang.org/api/sheets/v4"
 )
@@ -209,7 +210,8 @@ func buildUpdateCellFormatRequest(sheetID, startRow, rowCount, startCol, endCol 
 		},
 	}
 }
-func ExportProjectDataToDoc(service *docs.Service, documentID, tabName string, projectBrief *struct {
+
+func ExportProjectDataToDoc(service *docs.Service, documentID string, projectBrief *struct {
 	ProjectGoal       string `json:"project_goal"`
 	PrimaryObjectives string `json:"primary_objectives"`
 	ExpectedOutcomes  string `json:"expected_outcomes"`
@@ -221,8 +223,7 @@ func ExportProjectDataToDoc(service *docs.Service, documentID, tabName string, p
 	}
 
 	textToInsert := fmt.Sprintf(
-		"\n\n=== [%s] ===\nProject Goal: %s\nPrimary Objectives: %s\nExpected Outcomes: %s\nSuccess Metrics: %s\n",
-		tabName,
+		"\nThe first promt\n\nProject Goal: %s\nPrimary Objectives: %s\nExpected Outcomes: %s\nSuccess Metrics: %s\n\n\n\n",
 		projectBrief.ProjectGoal,
 		projectBrief.PrimaryObjectives,
 		projectBrief.ExpectedOutcomes,

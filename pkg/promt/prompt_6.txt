@@ -1,23 +1,5 @@
-<<<<<<< HEAD
-6. Промпт для оценки сроков и стоимости проекта
-Этот промпт рассчитывает время разработки, состав команды и стоимость.
-Промпт:
-На основе функционального списка оцени сроки разработки, состав команды и стоимость проекта.
-📌 Укажи:
-Оптимальный состав команды: 
-PM - 2200$
-Teamlead - 2400$
-Backend - 2200$
-Frontend - 2200$
-UX/UI - 2400$
-QA - 2200$
-DevOPS - 2700$ 
-Оценку часов по модулям (Backend, Frontend, Дизайн, Тестировщик, DevOPS)
-Итоговую стоимость (по ставке/160часов*кол-во часов*курс доллара)
-Финансовый план (30% предоплата, оставшиеся платежи по месяцам)
-=======
-На основе предоставленного функционального списка оцени примерные сроки разработки, состав команды и общую стоимость проекта. 
-Учитывай фиксированные месячные ставки (в долларах США) для каждой роли:
+Based on the provided functional list, estimate the approximate development timeline, team composition, and overall project cost. 
+Take into account the fixed monthly salaries (in USD) for each role:
 
 - Project Manager (PM): 2200
 - Team Lead: 2400
@@ -27,26 +9,26 @@ DevOPS - 2700$
 - QA Engineer: 2200
 - DevOps Engineer: 2700
 
-Определи:
-1) Сколько месяцев (months) и сколько специалистов (count) нужно по каждой роли, 
-2) Сумму (sum) для каждой роли (sum = months * monthlySalary * count),
-3) Часы (hours), почасовую ставку (hourlyRate) и итоговую стоимость (cost) для модулей (например, Backend, Frontend, Design, Testing, DevOps),
-4) Финансовый план (financialPlan) с полями:
-   - "prepaymentPercent" (процент предоплаты),
-   - "prepayment" (сумма предоплаты),
-   - "monthlyPayments" — массив, в котором каждый элемент соответствует сумме за определённый месяц (например, [4000, 4500, 3700] если 3 месяца),
-   - "totalProjectCost" — общая сумма проекта.
+Determine:
+1) How many months (months) and how many specialists (count) are needed for each role,
+2) The total amount (sum) for each role (sum = months * monthlySalary * count),
+3) The hours (hours), hourly rate (hourlyRate), and total cost (cost) for each module (for example, Backend, Frontend, Design, Testing, DevOps),
+4) A financial plan (financialPlan) with the following fields:
+   - "prepaymentPercent" (the prepayment percentage),
+   - "prepayment" (the prepayment amount),
+   - "monthlyPayments" — an array in which each element corresponds to the amount for a given month (e.g., [4000, 4500, 3700] if there are 3 months),
+   - "totalProjectCost" — the total cost of the project.
 
-Верни ответ строго в формате JSON (без тройных кавычек и пояснений). Структура:
-- "team": массив объектов с полями "role", "count", "months", "monthlySalary", "sum".
-- "modules": массив объектов с полями "moduleName", "hours", "hourlyRate", "cost".
-- "financialPlan": объект с полями 
-  "prepaymentPercent", 
-  "prepayment", 
-  "monthlyPayments" (массив чисел), 
+Return the answer strictly in JSON format (without triple quotes or explanations). The structure should be:
+- "team": an array of objects with the fields "role", "count", "months", "monthlySalary", "sum".
+- "modules": an array of objects with the fields "moduleName", "hours", "hourlyRate", "cost".
+- "financialPlan": an object with the fields
+  "prepaymentPercent",
+  "prepayment",
+  "monthlyPayments" (an array of numbers),
   "totalProjectCost".
 
-Например (цифры можно менять, но сохраняй сами поля):
+For example (the numbers may vary, but keep the same fields):
 
 {
   "team": [
@@ -87,5 +69,4 @@ DevOPS - 2700$
   }
 }
 
-Верни, пожалуйста, только JSON, без обрамляющих кавычек и дополнительного текста.
->>>>>>> 049446241bd00e2e2ad3459a6a6b1b83753e4d88
+Please return only JSON, without enclosing quotes or any additional text.

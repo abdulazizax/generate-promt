@@ -1,5 +1,7 @@
-3. Промпт для инфраструктурной схемы
-Этот промпт описывает архитектуру системы.
-Промпт:
-Создай логическую инфраструктурную схему проекта.
-Опиши основные компоненты и их взаимодействие, включая Frontend, Backend, API, базы данных, хранилища и интеграции.
+3. Prompt for the infrastructure diagram
+This prompt describes the system architecture.
+Prompt:
+Create a logical infrastructure diagram of the project.
+Describe the main components and their interactions, including Frontend, Backend, API, databases, storage, and integrations.
+
+Response should be in text format

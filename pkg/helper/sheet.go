@@ -3,6 +3,7 @@ package helper
 import (
 	"context"
 	"fmt"
+
 	"google.golang.org/api/drive/v3"
 	"google.golang.org/api/option"
 
@@ -32,12 +33,6 @@ func CreateNewSpreadsheet(srv *sheets.Service, title string, sheetNames []string
 			},
 		})
 	}
-	requests = append(requests, &sheets.Request{
-		DeleteSheet: &sheets.DeleteSheetRequest{
-			SheetId: createdSheet.Sheets[0].Properties.SheetId,
-		},
-	})
-
 	requests = append(requests, &sheets.Request{
 		DeleteSheet: &sheets.DeleteSheetRequest{
 			SheetId: createdSheet.Sheets[0].Properties.SheetId,

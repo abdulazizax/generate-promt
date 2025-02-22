@@ -1,8 +1,11 @@
-5. Промпт для Site/App Map (Структурной карты проекта)
-Этот промпт визуализирует основные модули, роли и интеграции проекта.
-Промпт:
-Создай Site/App Map (структурную карту проекта).
-📌 Разбей на ключевые разделы:
-Функциональные модули (Регистрация,Главная страница, Страницы сайта или приложения и т. д.)
-Роли пользователей (Администратор, Клиент, …)
-Интеграции (CRM, Платежные системы, …)
+5. Prompt for a Site/App Map (Project Structure Map)
+This prompt visualizes the main modules, roles, and integrations of the project.
+
+Prompt:
+Create a Site/App Map (a structural map of the project).
+Please break it down into key sections:
+- Functional modules (Registration, Home Page, site or app pages, etc.)
+- User roles (Administrator, Client, etc.)
+- Integrations (CRM, payment systems, etc.)
+
+Response should be in text format

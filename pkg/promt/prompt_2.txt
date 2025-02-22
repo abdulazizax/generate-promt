@@ -1,87 +1,32 @@
-<<<<<<< HEAD
-2. Промпт для Сравнительного-анализа
-Этот промпт оценивает сильные и слабые стороны проекта исходя от конкурентов.
-Промпт:
-На основе входных данных и функционала проекта составь Сравнительный-анализ
-=======
-На основе входных данных и функционала нашего проекта составь Сравнительный-анализ нашего проекта и основных конкурентов. 
-Важные требования к ответу:
-1. Выводи результат только в формате JSON (без добавления кода в тройных кавычках, без Markdown-разметки и лишнего текста).
-2. Каждый элемент массива должен содержать поля:
-   - "Feature": (название функционала),
-   - "Proyekt": (наш проект),
-   - "Netflix": (конкурент),
-   - "IVI": (конкурент),
-   - "Megogo": (конкурент).
-3. Проставляй "✓" при наличии фичи и "✗" при отсутствии.
+You have data about our project: its name, domain, features, and goals. From this data, please infer three likely competitor names operating in the same space. Then, produce a comparative analysis in JSON format only, with these requirements:
 
-Например, итоговый JSON должен выглядеть так (точно без дополнительных символов и без тройных кавычек):
+1. The JSON output is an array of objects.
+2. Each object represents a single feature comparison, having:
+   - "Feature": the feature name.
+   - A field for our project, named exactly after the project's name (e.g., "MyProject").
+   - A field for each of the three inferred competitors (e.g., "Competitor1", "Competitor2", "Competitor3"), using their actual names instead of "Competitor1" and so on.
+3. Use "✓" if the project or competitor has that feature, or "✗" if not.
+4. Do not output any explanations or text besides the raw JSON. No triple quotes or extra formatting.
+
+For example, if you infer three competitors called "FastPay," "ClickX," and "Paymatic," and our project name is "MyPaymentSystem," your JSON might look like:
 
 [
   {
-    "Feature": "Онлайн-платежи",
-    "Proyekt": "✓",
-    "Netflix": "✓",
-    "IVI": "✓",
-    "Megogo": "✓"
+    "Feature": "International Payments",
+    "MyPaymentSystem": "✓",
+    "FastPay": "✓",
+    "ClickX": "✗",
+    "Paymatic": "✓"
   },
   {
-    "Feature": "Мультиязычная поддержка",
-    "Proyekt": "✓",
-    "Netflix": "✓",
-    "IVI": "✗",
-    "Megogo": "✓"
-  },
-  {
-    "Feature": "Платформа смарт-ТВ",
-    "Proyekt": "✓",
-    "Netflix": "✓",
-    "IVI": "✓",
-    "Megogo": "✓"
-  },
-  {
-    "Feature": "Модель подписки",
-    "Proyekt": "✓",
-    "Netflix": "✓",
-    "IVI": "✓",
-    "Megogo": "✓"
-  },
-  {
-    "Feature": "Google Cast поддержка",
-    "Proyekt": "✓",
-    "Netflix": "✓",
-    "IVI": "✗",
-    "Megogo": "✓"
-  },
-  {
-    "Feature": "Прямые трансляции",
-    "Proyekt": "✓",
-    "Netflix": "✗",
-    "IVI": "✗",
-    "Megogo": "✓"
-  },
-  {
-    "Feature": "Уведомления через Telegram Bot",
-    "Proyekt": "✓",
-    "Netflix": "✗",
-    "IVI": "✗",
-    "Megogo": "✗"
-  },
-  {
-    "Feature": "Оптимизированная доставка видео (CDN)",
-    "Proyekt": "✓",
-    "Netflix": "✓",
-    "IVI": "✓",
-    "Megogo": "✓"
-  },
-  {
-    "Feature": "Доступность через веб и мобильные приложения",
-    "Proyekt": "✓",
-    "Netflix": "✓",
-    "IVI": "✓",
-    "Megogo": "✓"
+    "Feature": "Mobile Wallet Integration",
+    "MyPaymentSystem": "✓",
+    "FastPay": "✓",
+    "ClickX": "✓",
+    "Paymatic": "✗"
   }
 ]
 
-Пожалуйста, верни ответ ровно в таком же формате JSON (без обрамления в тройные кавычки и без дополнительного текста).
->>>>>>> 049446241bd00e2e2ad3459a6a6b1b83753e4d88
+Remember:
+- You must guess appropriate competitor names from the project’s domain context.
+- Return only the JSON array with no extra text or code blocks.

@@ -39,16 +39,20 @@ func (h *Handler) ExecutePrompt(ctx *gin.Context) {
 		return
 	}
 
-	spreadsheet, err := helper.CreateNewSpreadsheet(h.SheetService, body.CompanyName, []string{"functionalReqs", "Competitors", "Pricing"})
+	spreadsheet, err := helper.CreateNewSpreadsheet(h.SheetService, body.CompanyName, []string{"Functions", "Competitors", "Pricing"})
 	if err != nil {
 		h.ReturnError(ctx, config.ErrorInternalServer, fmt.Sprintf("Failed to create a new spreadsheet: %v", err), http.StatusInternalServerError)
 		return
 	}
-	doc, err := helper.CreateNewDoc(h.DocService, body.CompanyName, []string{"tab1", "tab2"})
+	sheetUrl = fmt.Sprintf("https://docs.google.com/spreadsheets/d/%s/edit", spreadsheet.SpreadsheetId)
+
+	doc, err := helper.CreateNewDoc(h.DocService, body.CompanyName)
 	if err != nil {
 		h.ReturnError(ctx, config.ErrorInternalServer, fmt.Sprintf("Failed to create a new doc: %v", err), http.StatusInternalServerError)
 		return
 	}
+	docUrl = fmt.Sprintf("https://docs.google.com/document/d/%s/edit", doc.DocumentId)
+
 	conversationHistory := models.ConversationHistory{
 		ProjectInput: body,
 	}
@@ -57,50 +61,60 @@ func (h *Handler) ExecutePrompt(ctx *gin.Context) {
 		conversationHistory.Id = i
 		resp, err := h.processPrompt(&conversationHistory)
 		if err != nil {
-			h.ReturnError(ctx, config.ErrorInternalServer, fmt.Sprintf("Error while executing prompt %v", err), http.StatusInternalServerError)
+			h.ReturnError(ctx, config.ErrorInternalServer, "error while executing prompt: "+err.Error(), http.StatusInternalServerError)
 			return
 		}
-		switch conversationHistory.Id {
+
+		// Handle response from each prompt
+		switch i {
 		case 1:
 			var projectData models.ProjectResponse
 			if err := json.Unmarshal([]byte(resp), &projectData); err != nil {
-				h.ReturnError(ctx, config.ErrorBadRequest, fmt.Sprintf("%v", err), http.StatusBadRequest)
+				h.ReturnError(ctx, config.ErrorInternalServer, "unmarshal error in prompt: "+err.Error(), http.StatusInternalServerError)
 				return
 			}
-			if err := helper.ExportFunctionalRequirementsToSheet(h.SheetService, spreadsheet.SpreadsheetId, "functionalReqs", &projectData); err != nil {
-				h.ReturnError(ctx, config.ErrorInternalServer, "failed to writing response to excel sheets", http.StatusInternalServerError)
+			if err := helper.ExportFunctionalRequirementsToSheet(h.SheetService, spreadsheet.SpreadsheetId, "Functions", &projectData); err != nil {
+				h.ReturnError(ctx, config.ErrorInternalServer, "failed to write to Functions sheet: "+err.Error(), http.StatusInternalServerError)
 				return
 			}
-			sheetUrl = fmt.Sprintf("https://docs.google.com/spreadsheets/d/%s/edit", spreadsheet.SpreadsheetId)
-
-			if err := helper.ExportProjectDataToDoc(h.DocService, doc.DocumentId, "tab1", &projectData.ProjectBrief); err != nil {
-				h.ReturnError(ctx, config.ErrorInternalServer, "failed to writing response to google doc", http.StatusInternalServerError)
+			if err := helper.ExportProjectDataToDoc(h.DocService, doc.DocumentId, &projectData.ProjectBrief); err != nil {
+				h.ReturnError(ctx, config.ErrorInternalServer, "failed to write project brief to doc: "+err.Error(), http.StatusInternalServerError)
 				return
 			}
-			docUrl = fmt.Sprintf("https://docs.google.com/document/d/%s/edit", doc.DocumentId)
 		case 2:
-			err = helper.WriteDataToCompetitorsSheet(h.SheetService, spreadsheet.SpreadsheetId, "Competitors", resp)
-			if err != nil {
-				h.ReturnError(ctx, config.ErrorInternalServer, "failed to writing response to excel sheets", http.StatusInternalServerError)
+			if err := helper.WriteDataToCompetitorsSheet(h.SheetService, spreadsheet.SpreadsheetId, "Competitors", resp); err != nil {
+				h.ReturnError(ctx, config.ErrorInternalServer, "failed to write response to Competitors sheet: "+err.Error(), http.StatusInternalServerError)
+				return
+			}
+		case 3:
+			if err := helper.ExportDataToDoc(h.DocService, doc.DocumentId, "The third promt\n\n"+resp); err != nil {
+				h.ReturnError(ctx, config.ErrorInternalServer, "failed to write to doc: "+err.Error(), http.StatusInternalServerError)
+				return
+			}
+		case 4:
+			if err := helper.ExportDataToDoc(h.DocService, doc.DocumentId, "The fourth promt\n\n"+resp); err != nil {
+				h.ReturnError(ctx, config.ErrorInternalServer, "failed to write to doc: "+err.Error(), http.StatusInternalServerError)
+				return
+			}
+		case 5:
+			if err := helper.ExportDataToDoc(h.DocService, doc.DocumentId, "The fifth promt\n\n"+resp); err != nil {
+				h.ReturnError(ctx, config.ErrorInternalServer, "failed to write to doc: "+err.Error(), http.StatusInternalServerError)
 				return
 			}
 		case 6:
-			err = helper.WriteDataToPricingSheet(h.SheetService, spreadsheet.SpreadsheetId, "Pricing", resp)
-			if err != nil {
-				h.ReturnError(ctx, config.ErrorInternalServer, "failed to writing response to excel sheets", http.StatusInternalServerError)
+			if err := helper.WriteDataToPricingSheet(h.SheetService, spreadsheet.SpreadsheetId, "Pricing", resp); err != nil {
+				h.ReturnError(ctx, config.ErrorInternalServer, "failed to write response to Pricing sheet: "+err.Error(), http.StatusInternalServerError)
 				return
 			}
-			break
 		}
-
-		ctx.JSON(http.StatusOK, gin.H{
-			"message":  "Success!",
-			"docUrl":   docUrl,
-			"sheetUrl": sheetUrl,
-		})
-
-		ctx.JSON(http.StatusOK, models.SuccessResponse{Message: "Success!"})
 	}
+
+	// 5. If everything is OK, return success
+	ctx.JSON(http.StatusOK, gin.H{
+		"message":  "Success!",
+		"docUrl":   docUrl,
+		"sheetUrl": sheetUrl,
+	})
 }
 
 func (h *Handler) processPrompt(conversationHistory *models.ConversationHistory) (string, error) {
