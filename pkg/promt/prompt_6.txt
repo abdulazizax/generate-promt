@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 6. Промпт для оценки сроков и стоимости проекта
 Этот промпт рассчитывает время разработки, состав команды и стоимость.
 Промпт:
@@ -14,3 +15,77 @@ DevOPS - 2700$
 Оценку часов по модулям (Backend, Frontend, Дизайн, Тестировщик, DevOPS)
 Итоговую стоимость (по ставке/160часов*кол-во часов*курс доллара)
 Финансовый план (30% предоплата, оставшиеся платежи по месяцам)
+=======
+На основе предоставленного функционального списка оцени примерные сроки разработки, состав команды и общую стоимость проекта. 
+Учитывай фиксированные месячные ставки (в долларах США) для каждой роли:
+
+- Project Manager (PM): 2200
+- Team Lead: 2400
+- Backend Developer: 2200
+- Frontend Developer: 2200
+- UX/UI Designer: 2400
+- QA Engineer: 2200
+- DevOps Engineer: 2700
+
+Определи:
+1) Сколько месяцев (months) и сколько специалистов (count) нужно по каждой роли, 
+2) Сумму (sum) для каждой роли (sum = months * monthlySalary * count),
+3) Часы (hours), почасовую ставку (hourlyRate) и итоговую стоимость (cost) для модулей (например, Backend, Frontend, Design, Testing, DevOps),
+4) Финансовый план (financialPlan) с полями:
+   - "prepaymentPercent" (процент предоплаты),
+   - "prepayment" (сумма предоплаты),
+   - "monthlyPayments" — массив, в котором каждый элемент соответствует сумме за определённый месяц (например, [4000, 4500, 3700] если 3 месяца),
+   - "totalProjectCost" — общая сумма проекта.
+
+Верни ответ строго в формате JSON (без тройных кавычек и пояснений). Структура:
+- "team": массив объектов с полями "role", "count", "months", "monthlySalary", "sum".
+- "modules": массив объектов с полями "moduleName", "hours", "hourlyRate", "cost".
+- "financialPlan": объект с полями 
+  "prepaymentPercent", 
+  "prepayment", 
+  "monthlyPayments" (массив чисел), 
+  "totalProjectCost".
+
+Например (цифры можно менять, но сохраняй сами поля):
+
+{
+  "team": [
+    {
+      "role": "Project Manager (PM)",
+      "count": 1,
+      "months": 2,
+      "monthlySalary": 2200,
+      "sum": 4400
+    },
+    {
+      "role": "Team Lead",
+      "count": 1,
+      "months": 2,
+      "monthlySalary": 2400,
+      "sum": 4800
+    }
+  ],
+  "modules": [
+    {
+      "moduleName": "Backend",
+      "hours": 400,
+      "hourlyRate": 13.75,
+      "cost": 5500
+    },
+    {
+      "moduleName": "Frontend",
+      "hours": 350,
+      "hourlyRate": 13.75,
+      "cost": 4812.5
+    }
+  ],
+  "financialPlan": {
+    "prepaymentPercent": 30,
+    "prepayment": 5118.75,
+    "monthlyPayments": [4881.25, 5062.50],
+    "totalProjectCost": 17062.50
+  }
+}
+
+Верни, пожалуйста, только JSON, без обрамляющих кавычек и дополнительного текста.
+>>>>>>> 049446241bd00e2e2ad3459a6a6b1b83753e4d88

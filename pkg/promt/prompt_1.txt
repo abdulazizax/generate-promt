@@ -48,4 +48,8 @@ Information Provided:
 
 No additional commentary or text should be included outside the JSON.
 You are ChatGPT. Always respond in valid JSON only.
+<<<<<<< HEAD
 Please return the response exactly in the same JSON format (without enclosing in triple quotes and without any additional text).
+=======
+No additional commentary, explanation, or text outside the JSON output.
+>>>>>>> 049446241bd00e2e2ad3459a6a6b1b83753e4d88
