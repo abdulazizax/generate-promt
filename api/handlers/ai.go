@@ -74,7 +74,17 @@ func (h *Handler) ExecutePrompt(ctx *gin.Context) {
 				return
 			}
 		case 2:
-		case 3:
+			err := helper.WriteDataToCompetitorsSheet(h.SheetService, spreadsheet.SpreadsheetId, "Competitors", resp)
+			if err != nil {
+				h.ReturnError(ctx, config.ErrorInternalServer, "failed to writing response to excel sheets", http.StatusInternalServerError)
+				return
+			}
+		case 6:
+			err := helper.WriteDataToPricingSheet(h.SheetService, spreadsheet.SpreadsheetId, "Pricing", resp)
+			if err != nil {
+				h.ReturnError(ctx, config.ErrorInternalServer, "failed to writing response to excel sheets", http.StatusInternalServerError)
+				return
+			}
 		}
 	}
 
