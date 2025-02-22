@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"generate-promt-v1/api/models"
 	"generate-promt-v1/pkg/ai"
+	"generate-promt-v1/pkg/helper"
 	"net/http"
 	"os"
 	"strings"
@@ -46,11 +47,9 @@ func (h *Handler) ExecutePrompt(ctx *gin.Context) {
 			h.ReturnError(ctx, config.ErrorInternalServer, "Error while executing prompt", http.StatusInternalServerError)
 			return
 		}
-
-		err = h.writeFile(fmt.Sprintf("pkg/response/response_%d.md", conversationHistory.Id), resp)
-		if err != nil {
-			h.ReturnError(ctx, config.ErrorInternalServer, "Error while writing file", http.StatusInternalServerError)
-			return
+		switch conversationHistory.Id {
+		case 1:
+			helper.ExportFunctionalRequirementsToSheet()
 		}
 	}
 
@@ -89,20 +88,4 @@ func (h *Handler) readFile(path string) (string, error) {
 	}
 
 	return string(data), nil
-}
-
-func (h *Handler) writeFile(path, data string) error {
-	fmt.Println("Write this file => ", path)
-	file, err := os.OpenFile(path, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)
-	if err != nil {
-		return err
-	}
-	defer file.Close()
-
-	_, err = file.WriteString(data + "\n")
-	if err != nil {
-		return err
-	}
-
-	return nil
 }

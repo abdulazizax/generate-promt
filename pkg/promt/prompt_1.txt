@@ -1,20 +1,49 @@
-1 - Аналитический промпт
-Ты — продвинутый аналитик IT-проектов. На основе входных данных тебе нужно создать бриф проекта и функциональные требования.
-Входные данные:
-Название компании: [Название]
-Описание проекта: [Краткое описание]
-Аналоги: [Перечень аналогов и их особенности]
-Что хочет клиент: [Основные пожелания клиента]
-Основные пользователи системы: [Целевая аудитория]
-Ключевые интеграции: [API, CRM, платежные системы и др.]
-Ограничения: [Технические, бизнесовые и юридические]
-Выходные данные:
-📌 Бриф проекта
-Цель проекта
-Основные задачи
-Ожидаемые результаты
-Ключевые метрики успеха
-📌 Функциональные требования
-Epic → Story → Task
-Краткое описание всех модулей и задач
-Описание функциональности каждого элемента систем
+You are an experienced IT project analyst. Based on the information below, create:
+1. A **project brief** with:
+   - project_goal
+   - primary_objectives
+   - expected_outcomes
+   - success_metrics
+
+2. **Functional requirements** in nested format:
+   - "functional_requirements": an array of epics
+   - Each epic has:
+       "epic": the epic title
+       "stories": an array of story objects
+   - Each story has:
+       "story": the story title
+       "tasks": an array of tasks (strings)
+
+We want multiple epics, each with multiple stories, and each story with multiple tasks.
+
+You must respond **only** in **this exact JSON format** (no extra text before or after):
+{
+  "project_brief": {
+    "project_goal": "",
+    "primary_objectives": "",
+    "expected_outcomes": "",
+    "success_metrics": ""
+  },
+  "functional_requirements": [
+    {
+      "epic": "",
+      "stories": [
+        {
+          "story": "",
+          "tasks": [""]
+        }
+      ]
+    }
+  ]
+}
+
+Information Provided:
+- Company Name: [company_name]
+- Project Summary: [project_summary]
+- Competitors: [competitors]
+- Client Goals: [client_goals]
+- Target Audience: [target_audience]
+- Key Integrations: [key_integrations]
+- Constraints: [constraints]
+
+No additional commentary or text should be included outside the JSON.

@@ -1,7 +1,11 @@
 package api
 
 import (
+	"context"
 	"generate-promt-v1/api/handlers"
+	"google.golang.org/api/option"
+	"google.golang.org/api/sheets/v4"
+	"log"
 
 	"generate-promt-v1/pkg/logger"
 
@@ -28,8 +32,11 @@ func New(openaiClient *openai.Client, logger logger.Logger) *gin.Engine {
 	config.AllowHeaders = append(config.AllowHeaders, "*")
 
 	router.Use(cors.New(config))
-
-	handler := handlers.New(openaiClient, logger)
+	sheetService, err := sheets.NewService(context.Background(), option.WithCredentialsFile("service_account.json"))
+	if err != nil {
+		log.Fatalf("Unable to create Sheets service: %v", err)
+	}
+	handler := handlers.New(openaiClient, logger, sheetService)
 
 	router.POST("/prompt/execute", handler.ExecutePrompt)
 
