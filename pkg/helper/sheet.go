@@ -2,6 +2,9 @@ package helper
 
 import (
 	"context"
+	"fmt"
+	"google.golang.org/api/drive/v3"
+	"google.golang.org/api/option"
 
 	"google.golang.org/api/sheets/v4"
 )
@@ -62,6 +65,31 @@ func CreateNewSpreadsheet(srv *sheets.Service, title string, sheetNames []string
 	if err != nil {
 		return nil, err
 	}
-
+	err = makeFilePublic(updatedSpreadsheet.SpreadsheetId)
+	if err != nil {
+		return nil, err
+	}
 	return updatedSpreadsheet, nil
+}
+
+func makeFilePublic(fileID string) error {
+	driveService, err := drive.NewService(
+		context.Background(),
+		option.WithCredentialsFile("service_account.json"),
+	)
+	if err != nil {
+		return fmt.Errorf("unable to create Drive client: %v", err)
+	}
+
+	perm := &drive.Permission{
+		Type: "anyone",
+		Role: "reader",
+	}
+
+	_, err = driveService.Permissions.Create(fileID, perm).Do()
+	if err != nil {
+		return fmt.Errorf("unable to set file as public: %v", err)
+	}
+
+	return nil
 }
