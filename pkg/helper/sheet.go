@@ -20,12 +20,6 @@ func CreateNewSpreadsheet(srv *sheets.Service, title string, sheetNames []string
 
 	requests := []*sheets.Request{}
 
-	requests = append(requests, &sheets.Request{
-		DeleteSheet: &sheets.DeleteSheetRequest{
-			SheetId: createdSheet.Sheets[0].Properties.SheetId,
-		},
-	})
-
 	for _, name := range sheetNames {
 		requests = append(requests, &sheets.Request{
 			AddSheet: &sheets.AddSheetRequest{
@@ -35,6 +29,12 @@ func CreateNewSpreadsheet(srv *sheets.Service, title string, sheetNames []string
 			},
 		})
 	}
+
+	requests = append(requests, &sheets.Request{
+		DeleteSheet: &sheets.DeleteSheetRequest{
+			SheetId: createdSheet.Sheets[0].Properties.SheetId,
+		},
+	})
 
 	if len(requests) > 0 {
 		rb := &sheets.BatchUpdateSpreadsheetRequest{
