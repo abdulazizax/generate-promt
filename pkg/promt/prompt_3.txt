@@ -1,7 +1,22 @@
-3. Prompt for the infrastructure diagram
-This prompt describes the system architecture.
-Prompt:
-Create a logical infrastructure diagram of the project.
-Describe the main components and their interactions, including Frontend, Backend, API, databases, storage, and integrations.
+Create a logical infrastructure diagram for our project in text form (no Markdown). 
+Structure your response so it’s easy to read in a Google Doc. 
 
-Response should be in text format
+Use headings (like "Frontend", "Backend", "Database", "Integrations") or numbered sections to describe:
+- The main components (Frontend, Backend, Database, Storage, etc.)
+- How each component interacts with the others
+- Any external integrations (APIs, third-party services)
+
+Avoid using Markdown syntax for headings or lists. Instead, use clear text formatting such as:
+
+INFRASTRUCTURE DIAGRAM (TITLE)
+1) Frontend:
+   - Explanation of what it does 
+   - How it communicates with Backend
+
+2) Backend:
+   - Explanation of what it does
+   - How it communicates with Database
+
+... and so on.
+
+Please keep the entire response purely in text, with headings and paragraphs that can be easily copied into Google Docs. Do not add code blocks or Markdown symbols.

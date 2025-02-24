@@ -222,12 +222,15 @@ func ExportProjectDataToDoc(service *docs.Service, documentID string, projectBri
 		return fmt.Errorf("failed to read doc %s: %w", documentID, err)
 	}
 
+	tab := "############################################################################"
+
 	textToInsert := fmt.Sprintf(
-		"\nThe first promt\n\nProject Goal: %s\nPrimary Objectives: %s\nExpected Outcomes: %s\nSuccess Metrics: %s\n\n\n\n",
+		"\nThe first promt:\n\nProject Goal: %s\nPrimary Objectives: %s\nExpected Outcomes: %s\nSuccess Metrics: %s\n\n%s\n\n\n",
 		projectBrief.ProjectGoal,
 		projectBrief.PrimaryObjectives,
 		projectBrief.ExpectedOutcomes,
 		projectBrief.SuccessMetrics,
+		tab,
 	)
 
 	requests := []*docs.Request{

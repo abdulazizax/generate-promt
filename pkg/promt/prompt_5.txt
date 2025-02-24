@@ -1,11 +1,21 @@
-5. Prompt for a Site/App Map (Project Structure Map)
-This prompt visualizes the main modules, roles, and integrations of the project.
-
-Prompt:
-Create a Site/App Map (a structural map of the project).
-Please break it down into key sections:
-- Functional modules (Registration, Home Page, site or app pages, etc.)
+Create a Site/App Map (a structural map of the project) in plain text. 
+Organize it with headings or numbered sections for clarity, including:
+- Functional modules (Registration, Home Page, etc.)
 - User roles (Administrator, Client, etc.)
 - Integrations (CRM, payment systems, etc.)
 
-Response should be in text format
+For example:
+
+SITE/APP MAP
+1) Functional Modules:
+   - Registration: how it works, etc.
+   - Home Page: ...
+   - ...
+2) User Roles:
+   - Administrator: what they can do
+   - Client: what they can do
+3) Integrations:
+   - CRM: ...
+   - Payment systems: ...
+
+Do not use Markdown or code blocks. Provide a straightforward text layout that’s easy to insert into Google Docs.

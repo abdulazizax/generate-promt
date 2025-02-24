@@ -87,17 +87,17 @@ func (h *Handler) ExecutePrompt(ctx *gin.Context) {
 				return
 			}
 		case 3:
-			if err := helper.ExportDataToDoc(h.DocService, doc.DocumentId, "The third promt\n\n"+resp); err != nil {
+			if err := helper.ExportDataToDoc(h.DocService, doc.DocumentId, "The third promt:\n\n"+resp); err != nil {
 				h.ReturnError(ctx, config.ErrorInternalServer, "failed to write to doc: "+err.Error(), http.StatusInternalServerError)
 				return
 			}
 		case 4:
-			if err := helper.ExportDataToDoc(h.DocService, doc.DocumentId, "The fourth promt\n\n"+resp); err != nil {
+			if err := helper.ExportDataToDoc(h.DocService, doc.DocumentId, "The fourth promt:\n\n"+resp); err != nil {
 				h.ReturnError(ctx, config.ErrorInternalServer, "failed to write to doc: "+err.Error(), http.StatusInternalServerError)
 				return
 			}
 		case 5:
-			if err := helper.ExportDataToDoc(h.DocService, doc.DocumentId, "The fifth promt\n\n"+resp); err != nil {
+			if err := helper.ExportDataToDoc(h.DocService, doc.DocumentId, "The fifth promt:\n\n"+resp); err != nil {
 				h.ReturnError(ctx, config.ErrorInternalServer, "failed to write to doc: "+err.Error(), http.StatusInternalServerError)
 				return
 			}

@@ -1,12 +1,21 @@
-4. Prompt for a BPMN diagram (Business Process Model and Notation)
-This prompt constructs a model of user interaction with the system.
+Based on the project data, create a BPMN diagram in text form (no Markdown). 
+Describe the key interaction steps in a clear, structured way so it fits nicely in a Google Doc. 
+Focus on the sequence of actions from the client’s perspective to concluding the deal.
 
-Prompt:
-Based on the project data, create a BPMN diagram.
-Please describe the key interaction steps:
-Client → System Login
-Selecting an Object → Starting a VR Tour
-Submitting a Request → Contacting a Realtor
-Discussing Terms → Concluding the Deal
+Steps to include (as headings or bullet points):
+1) Client logs in
+2) Client selects an object and starts a VR tour
+3) Client submits a request and contacts a realtor
+4) Client and realtor discuss terms
+5) Deal is concluded
 
-Response should be in text format
+Structure it like:
+BPMN MODEL
+1) Login:
+   - Explanation...
+2) Selecting an Object / VR Tour:
+   - Explanation...
+3) Submitting a Request...
+... etc.
+
+Avoid using code blocks or Markdown. Just return a text-based outline that I can paste into Google Docs easily.
