@@ -45,6 +45,7 @@ func (h *Handler) ExecutePrompt(ctx *gin.Context) {
 		return
 	}
 	sheetUrl = fmt.Sprintf("https://docs.google.com/spreadsheets/d/%s/edit", spreadsheet.SpreadsheetId)
+	fmt.Println("Google sheet created. SheetUrl: ", sheetUrl)
 
 	doc, err := helper.CreateNewDoc(h.DocService, body.CompanyName)
 	if err != nil {
@@ -52,6 +53,7 @@ func (h *Handler) ExecutePrompt(ctx *gin.Context) {
 		return
 	}
 	docUrl = fmt.Sprintf("https://docs.google.com/document/d/%s/edit", doc.DocumentId)
+	fmt.Println("Google doc created. DocUrl: ", docUrl)
 
 	conversationHistory := models.ConversationHistory{
 		ProjectInput: body,
